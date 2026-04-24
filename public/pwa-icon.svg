@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="After Credits">
+  <rect width="512" height="512" rx="96" fill="#111113"/>
+  <rect x="104" y="76" width="304" height="360" rx="28" fill="#1B1B1F" stroke="#F3EFE7" stroke-opacity=".12" stroke-width="8"/>
+  <rect x="136" y="112" width="240" height="292" rx="18" fill="#25242A"/>
+  <path d="M136 315 211 238l46 48 42-58 77 87v89H136z" fill="#58C4B8" opacity=".72"/>
+  <circle cx="308" cy="178" r="34" fill="#F3B562"/>
+  <path d="M153 405h206" stroke="#E85D75" stroke-width="14" stroke-linecap="round"/>
+  <path d="M180 440h152" stroke="#F3B562" stroke-width="12" stroke-linecap="round"/>
+</svg>
