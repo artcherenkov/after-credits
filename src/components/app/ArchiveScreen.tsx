@@ -69,11 +69,8 @@ export function ArchiveScreen({
     <div className="relative flex min-h-dvh flex-col gap-5 pb-24">
       <header className="flex items-start justify-between gap-4">
         <div className="flex min-w-0 flex-col gap-1">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cinema-amber/80">
-            Soft Cinema Archive
-          </p>
           <h1 className="text-3xl font-semibold leading-tight text-cinema-text">
-            After Credits
+            Cinema Archive
           </h1>
         </div>
         <div className="flex shrink-0 items-center gap-2 pt-1">

@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { Star } from "lucide-react"
 
 type RatingInputProps = {
   label: string
@@ -13,73 +13,43 @@ export function RatingInput({
   accent,
   onChange,
 }: RatingInputProps) {
-  const [textValue, setTextValue] = useState(formatRatingValue(value))
+  const activeClass =
+    accent === "rose"
+      ? "text-cinema-rose"
+      : "text-cinema-teal"
   const focusClass =
     accent === "rose"
-      ? "focus-within:border-cinema-rose focus-within:ring-cinema-rose/20"
-      : "focus-within:border-cinema-teal focus-within:ring-cinema-teal/20"
+      ? "focus-visible:ring-cinema-rose/30"
+      : "focus-visible:ring-cinema-teal/30"
 
   return (
-    <label className="flex w-[8.75rem] flex-col gap-2">
-      <span className="text-xs font-semibold text-cinema-muted">{label}</span>
-      <span
-        className={`flex h-12 w-full items-baseline justify-end rounded-lg border border-white/10 bg-transparent px-2 text-cinema-text transition focus-within:ring-3 ${focusClass}`}
-      >
-        <input
-          aria-label={label}
-          className="w-[4.5rem] bg-transparent text-right text-3xl font-semibold leading-none tabular-nums text-cinema-text outline-none placeholder:text-cinema-muted/45"
-          inputMode="decimal"
-          onBlur={() => setTextValue(formatRatingValue(parseRating(textValue)))}
-          onChange={(event) => {
-            const nextValue = sanitizeRatingInput(event.target.value)
+    <fieldset className="flex min-w-0 flex-col gap-2">
+      <legend className="text-xs font-semibold text-cinema-muted">{label}</legend>
+      <div className="flex items-center gap-1" role="radiogroup">
+        {Array.from({ length: 10 }, (_, index) => {
+          const rating = index + 1
+          const isActive = value !== null && rating <= value
 
-            setTextValue(nextValue)
-            onChange(parseRating(nextValue))
-          }}
-          pattern="[0-9]*[.,]?[0-9]*"
-          placeholder="__"
-          type="text"
-          value={textValue}
-        />
-        <span className="ml-1 text-base font-semibold text-cinema-muted">
-          /10
-        </span>
-      </span>
-    </label>
+          return (
+            <button
+              aria-checked={value === rating}
+              aria-label={`${label} ${rating} of 10`}
+              className={`flex size-7 items-center justify-center rounded-md text-cinema-muted transition hover:text-cinema-amber focus-visible:outline-none focus-visible:ring-3 ${focusClass} ${
+                isActive ? activeClass : ""
+              }`}
+              key={rating}
+              onClick={() => onChange(value === rating ? null : rating)}
+              role="radio"
+              type="button"
+            >
+              <Star
+                aria-hidden="true"
+                className={isActive ? "fill-current" : ""}
+              />
+            </button>
+          )
+        })}
+      </div>
+    </fieldset>
   )
-}
-
-function sanitizeRatingInput(value: string) {
-  const cleanValue = value.replace(/[^0-9.,]/g, "").replace(",", ".")
-  const [whole = "", ...fractions] = cleanValue.split(".")
-  const fraction = fractions.join("").slice(0, 1)
-  const limitedWhole = whole.slice(0, 2)
-
-  if (cleanValue.includes(".")) {
-    return `${limitedWhole}.${fraction}`
-  }
-
-  return limitedWhole
-}
-
-function parseRating(value: string) {
-  if (!value || value === ".") {
-    return null
-  }
-
-  const rating = Number(value)
-
-  if (Number.isNaN(rating)) {
-    return null
-  }
-
-  return Math.min(10, Math.max(0, Math.round(rating * 10) / 10))
-}
-
-function formatRatingValue(value: number | null) {
-  if (value === null || Number.isNaN(value)) {
-    return ""
-  }
-
-  return String(value)
 }

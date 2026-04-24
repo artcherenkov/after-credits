@@ -13,8 +13,8 @@ export default defineConfig({
       injectRegister: "auto",
       registerType: "autoUpdate",
       manifest: {
-        name: "After Credits",
-        short_name: "Credits",
+        name: "Cinema Archive",
+        short_name: "Cinema Archive",
         description: "A local-first movie diary for memories after watching.",
         theme_color: "#111113",
         background_color: "#111113",

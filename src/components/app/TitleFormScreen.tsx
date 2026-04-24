@@ -83,7 +83,7 @@ export function TitleFormScreen({
             {isEditing ? "Edit memory" : "New memory"}
           </p>
           <h1 className="truncate text-xl font-semibold text-cinema-text">
-            {draft.title || "After Credits"}
+            {draft.title || "Cinema Archive"}
           </h1>
         </div>
         {isEditing && entry?.id ? (
@@ -169,10 +169,10 @@ export function TitleFormScreen({
       </section>
 
       <section className="flex flex-col gap-4 rounded-lg border border-white/10 bg-cinema-surface/90 p-3">
-        <div className="flex flex-wrap items-start gap-5">
+        <div className="flex flex-col gap-4">
           <RatingInput
             accent="rose"
-            label="Her rating"
+            label="She"
             onChange={(ratingHer) =>
               setDraft((current) => ({ ...current, ratingHer }))
             }
@@ -180,7 +180,7 @@ export function TitleFormScreen({
           />
           <RatingInput
             accent="teal"
-            label="My rating"
+            label="He"
             onChange={(ratingMe) =>
               setDraft((current) => ({ ...current, ratingMe }))
             }
@@ -199,7 +199,7 @@ export function TitleFormScreen({
                 note: event.target.value,
               }))
             }
-            placeholder="One line after the credits"
+            placeholder="Short note"
             value={draft.note}
           />
         </label>
